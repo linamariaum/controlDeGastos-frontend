@@ -10,6 +10,8 @@ import { UsuarioComponent } from './components/usuario/usuario.component';
 import { LoginComponent } from './components/usuario/login/login.component';
 import { RegistroComponent } from './components/usuario/registro/registro.component';
 import { AppRoutingModule } from './app-routing.module';
+import { HomeComponent } from './components/home/home.component';
+import { CategoriaComponent } from './components/categoria/categoria.component';
 //import { AuthGuard } from './auth/auth.guard';
 //import { AuthInterceptor } from './auth/auth.interceptor';
 
@@ -18,7 +20,9 @@ import { AppRoutingModule } from './app-routing.module';
     AppComponent,
     UsuarioComponent,
     LoginComponent,
-    RegistroComponent
+    RegistroComponent,
+    HomeComponent,
+    CategoriaComponent
   ],
   imports: [
     BrowserModule,
