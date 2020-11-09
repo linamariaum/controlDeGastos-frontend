@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule} from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
@@ -15,6 +16,10 @@ import { CategoriaComponent } from './components/categoria/categoria.component';
 //import { AuthGuard } from './auth/auth.guard';
 //import { AuthInterceptor } from './auth/auth.interceptor';
 
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { ItemComponent } from './components/item/item.component';
+import { PuntoCompraComponent } from './components/punto-compra/punto-compra.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,11 +27,15 @@ import { CategoriaComponent } from './components/categoria/categoria.component';
     LoginComponent,
     RegistroComponent,
     HomeComponent,
-    CategoriaComponent
+    CategoriaComponent,
+    ItemComponent,
+    PuntoCompraComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
+    BsDatepickerModule.forRoot(),
     HttpClientModule,
     AppRoutingModule,
     ToastrModule.forRoot()

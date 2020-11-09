@@ -5,6 +5,8 @@ import { RegistroComponent } from './components/usuario/registro/registro.compon
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { HomeComponent } from './components/home/home.component';
 import { CategoriaComponent } from './components/categoria/categoria.component';
+import { ItemComponent } from './components/item/item.component';
+import { PuntoCompraComponent } from './components/punto-compra/punto-compra.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -17,6 +19,8 @@ const routes: Routes = [
     children: [{ path: '', component: LoginComponent }]
   },
   { path: 'categoria', component: CategoriaComponent },
+  { path: 'item', component: ItemComponent },
+  { path: 'puntoCompra', component: PuntoCompraComponent },
   { path: '', redirectTo:'/login', pathMatch: 'full' }
 ];
 
