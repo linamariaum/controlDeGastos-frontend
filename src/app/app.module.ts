@@ -19,6 +19,7 @@ import { CategoriaComponent } from './components/categoria/categoria.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ItemComponent } from './components/item/item.component';
 import { PuntoCompraComponent } from './components/punto-compra/punto-compra.component';
+import { ProductoComponent } from './components/producto/producto.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { PuntoCompraComponent } from './components/punto-compra/punto-compra.com
     HomeComponent,
     CategoriaComponent,
     ItemComponent,
-    PuntoCompraComponent
+    PuntoCompraComponent,
+    ProductoComponent
   ],
   imports: [
     BrowserModule,
