@@ -6,6 +6,7 @@ import { UsuarioComponent } from './components/usuario/usuario.component';
 import { HomeComponent } from './components/home/home.component';
 import { CategoriaComponent } from './components/categoria/categoria.component';
 import { ItemComponent } from './components/item/item.component';
+import { ProductoComponent } from './components/producto/producto.component';
 import { PuntoCompraComponent } from './components/punto-compra/punto-compra.component';
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
   },
   { path: 'categoria', component: CategoriaComponent },
   { path: 'item', component: ItemComponent },
+  { path: 'producto', component: ProductoComponent },
   { path: 'puntoCompra', component: PuntoCompraComponent },
   { path: '', redirectTo:'/login', pathMatch: 'full' }
 ];
