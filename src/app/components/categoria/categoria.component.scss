@@ -3,6 +3,7 @@
     margin-bottom: 3em;
     padding-top: 2em;
     background-color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .form-inline .bi {
@@ -30,4 +31,8 @@
 .btn-outline-primary:hover, .btn-outline-primary:not(:disabled):not(.disabled):active {
     background-color: #00B6A2;
     color: #fff;
+}
+
+.row {
+    padding-top: 1rem;
 }

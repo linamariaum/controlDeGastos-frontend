@@ -20,6 +20,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ItemComponent } from './components/item/item.component';
 import { PuntoCompraComponent } from './components/punto-compra/punto-compra.component';
 import { ProductoComponent } from './components/producto/producto.component';
+import { MovimientoComponent } from './components/movimiento/movimiento.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ProductoComponent } from './components/producto/producto.component';
     CategoriaComponent,
     ItemComponent,
     PuntoCompraComponent,
-    ProductoComponent
+    ProductoComponent,
+    MovimientoComponent
   ],
   imports: [
     BrowserModule,
