@@ -21,6 +21,7 @@ import { ItemComponent } from './components/item/item.component';
 import { PuntoCompraComponent } from './components/punto-compra/punto-compra.component';
 import { ProductoComponent } from './components/producto/producto.component';
 import { MovimientoComponent } from './components/movimiento/movimiento.component';
+import { CrearMovimientoComponent } from './components/movimiento/crear-movimiento/crear-movimiento.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { MovimientoComponent } from './components/movimiento/movimiento.componen
     ItemComponent,
     PuntoCompraComponent,
     ProductoComponent,
-    MovimientoComponent
+    MovimientoComponent,
+    CrearMovimientoComponent
   ],
   imports: [
     BrowserModule,

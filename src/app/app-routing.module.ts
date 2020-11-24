@@ -8,6 +8,8 @@ import { CategoriaComponent } from './components/categoria/categoria.component';
 import { ItemComponent } from './components/item/item.component';
 import { ProductoComponent } from './components/producto/producto.component';
 import { PuntoCompraComponent } from './components/punto-compra/punto-compra.component';
+import { MovimientoComponent } from './components/movimiento/movimiento.component';
+import { CrearMovimientoComponent } from './components/movimiento/crear-movimiento/crear-movimiento.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -23,6 +25,8 @@ const routes: Routes = [
   { path: 'item', component: ItemComponent },
   { path: 'producto', component: ProductoComponent },
   { path: 'puntoCompra', component: PuntoCompraComponent },
+  { path: 'movimiento', component: MovimientoComponent },
+  { path: 'movimiento/registrar', component: CrearMovimientoComponent },
   { path: '', redirectTo:'/login', pathMatch: 'full' }
 ];
 
