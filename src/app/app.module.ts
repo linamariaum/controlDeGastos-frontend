@@ -3,6 +3,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule} from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 import { AppComponent } from './app.component';
 import { UsuarioService } from './services/usuario.service';
@@ -44,7 +46,9 @@ import { CrearMovimientoComponent } from './components/movimiento/crear-movimien
     BsDatepickerModule.forRoot(),
     HttpClientModule,
     AppRoutingModule,
-    ToastrModule.forRoot()
+    TooltipModule.forRoot(),
+    ToastrModule.forRoot(),
+    SweetAlert2Module.forRoot()
   ],
   providers: [UsuarioService, /*AuthGuard,
     ,

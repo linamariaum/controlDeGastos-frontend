@@ -76,6 +76,7 @@
             <th scope="col" class="colum-cod">Código</th>
             <th scope="col" class="colum-fecha">Fecha</th>
             <th scope="col" class="colum-precio">Nombre</th>
+            <th scope="col" class="colum-cat">Categoria</th>
             <th scope="col" class="colum-acciones"></th>
         </tr>
     </thead>
@@ -83,6 +84,7 @@
         <tr>
             <th scope="row">1</th>
             <td>23/10/20</td>
+            <td>Mantenimiento</td>
             <td>Casa</td>
             <td>
                 <div class="elementos-acciones">
@@ -138,15 +140,33 @@
             <div class="modal-body">
                 <div class="container">
                     <div class="row">
+                        <div class="col-sm-6">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="almacenid">Categoria</label>
+                                </div>
+                                <select class="custom-select" id="inputGroupSelect01">
+                                    <option disabled [ngValue]="null">Seleccionar...</option>
+                                    <option value="Nuevo">Casa</option>
+                                    <option value="Usado">Entretenimiento</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">Nombre</span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-lg-12">
                             <form>
                                 <div class="form-group">
-                                  <label for="nombreCategoria">Nombre</label>
-                                  <input type="text" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                  <label for="descripCategoria">Descripción</label>
-                                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    <label for="descripCategoria">Descripción</label>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                                 </div>
                             </form>
                         </div>
@@ -175,16 +195,16 @@
                 <div class="fecha-modal">
                     23/10/20
                 </div>
-                <div class="almacen" >
-                    Nombre: 
+                <div class="almacen">
+                    Nombre: Mantenimiento
                 </div>
                 <div class="user">
-                    Descripción:
+                    Descripción: Here comes the description!
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-primary boton-secundario-modal" data-dismiss="modal" data-toggle="modal"
-                data-target="#crearCategoria">Modificar</button>
+                <button type="button" class="btn btn-outline-primary boton-secundario-modal" data-dismiss="modal"
+                    data-toggle="modal" data-target="#crearCategoria">Modificar</button>
             </div>
         </div>
     </div>

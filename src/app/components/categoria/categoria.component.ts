@@ -8,6 +8,9 @@ import { Router } from '@angular/router';
 })
 export class CategoriaComponent implements OnInit {
 
+  categoria : any = {};
+  categorias : any = [];
+
   elementos: any = [];
   busqueda: any = {
     tipo: 'codigo',
@@ -28,6 +31,23 @@ export class CategoriaComponent implements OnInit {
       busqueda: '',
       fecha: ''
     };
+    this.categorias = [
+      {
+        id: '1',
+        nombre: 'Categoria 1',
+        descripcion: 'here comes the description'
+      },
+      {
+        id: '2',
+        nombre: 'Categoria 2',
+        descripcion: 'here comes the description'
+      },
+      {
+        id: '3',
+        nombre: 'Categoria 3',
+        descripcion: 'here comes the description'
+      }
+    ];
   }
 
   cambioDeBusqueda() {
@@ -41,7 +61,7 @@ export class CategoriaComponent implements OnInit {
         this.busquedaPorCodigo();
         break;
       case 'nombre':
-        this.busquedaPorProducto();
+        this.busquedaPorNombre();
         break;
       case 'fechas':
         this.busquedaPorFechas();
@@ -52,7 +72,7 @@ export class CategoriaComponent implements OnInit {
   busquedaPorCodigo() {
   }
 
-  busquedaPorProducto() {
+  busquedaPorNombre() {
   }
 
   busquedaPorFechas() {
@@ -60,6 +80,14 @@ export class CategoriaComponent implements OnInit {
       startDate: `${this.busqueda.fecha[0].getFullYear()}/${this.busqueda.fecha[0].getMonth() + 1}/${this.busqueda.fecha[0].getDate()}`,
       endDate: `${this.busqueda.fecha[1].getFullYear()}/${this.busqueda.fecha[1].getMonth() + 1}/${this.busqueda.fecha[1].getDate()}`
     };
+  }
+
+  capturar(categoria){
+    this.categoria = categoria;
+  }
+
+  modificarCategoria(){
+
   }
 
   eliminarCompra(id: string) {

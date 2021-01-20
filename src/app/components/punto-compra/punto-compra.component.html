@@ -1,60 +1,114 @@
 <div class="container">
     <div class="row">
-        <div class="col-sm-4">
-            <div class="card card1 border-info mb-3" style="max-width: 18rem;">
-                <div class="card-header">ID</div>
-                <div class="card-body text-info">
-                    <h5 class="card-title">Nombre punto de compra</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's
-                        content.</p>
-                </div>
-                <div class="card-footer bg-transparent">
-                    <button>Modificar</button>
+        <div class="col-sm-12 crearContent">
+            <!-- <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal"
+                data-target="#crearPuntoCompra"><b>+</b></button> -->
+            <a class="btn-crear" data-dismiss="modal" data-toggle="modal" data-target="#crearPuntoCompra"
+                tooltip="Crear un punto de compra" placement="right">
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-plus"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                </svg>
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="container cards-container">
+            <div class="row cards-row">
+
+                <div class="col-sm-4" *ngFor="let card of cards;">
+                    <div class="card card1 mb-2">
+                        <div class="card-header">{{card.title}}</div>
+                        <div class="card-body">
+                            <p class="card-text">ID</p>
+                            <p class="card-text">{{card.description}}</p>
+                            <a class="btn btn-outline-primary" data-dismiss="modal" data-toggle="modal" data-target="#modificarPuntoCompra" (click)="capturar(card)">Modificar</a>
+                            <a class="btn btn-outline-secondary"
+                                [swal]="deleteSwal">Eliminar</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-sm-4">
-            <div class="card card1 border-info mb-3" style="max-width: 18rem;">
-                <div class="card-header">ID</div>
-                <div class="card-body text-info">
-                    <h5 class="card-title">Nombre punto de compra</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's
-                        content.</p>
+    </div>
+</div>
+
+<swal #deleteSwal title="¿Desea eliminar este punto de compra?" text="Esto no se podrá deshacer" icon="question"
+    [showCancelButton]="true" [focusCancel]="true" cancelButtonText="Cancelar" confirmButtonText="Eliminar"
+    (confirm)="deleteFile()">
+</swal>
+
+<!-- Modal Crear -->
+<div class="modal fade" id="crearPuntoCompra" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" id="ancho">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Crear punto de compra</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <form>
+                                <div class="form-group">
+                                    <label for="nombreCategoria">Nombre</label>
+                                    <input type="text" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="descripCategoria">Descripción</label>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-footer bg-transparent">
-                    <button>Modificar</button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Crear</button>
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
-        <div class="col-sm-4">
-            <div class="card card1 border-info mb-3" style="max-width: 18rem;">
-                <div class="card-header">ID</div>
-                <div class="card-body text-info">
-                    <h5 class="card-title">Nombre punto de compra</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's
-                        content.</p>
+    </div>
+</div>
+
+<!-- Modal Modificar -->
+<div class="modal fade" id="modificarPuntoCompra" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" id="ancho">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modificar información</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <form>
+                                <div class="form-group">
+                                    <label for="nombreCategoria">Nombre</label>
+                                    <input type="text" class="form-control" value={{punto.title}} required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="descripCategoria">Descripción</label>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3">{{punto.description}}</textarea>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-footer bg-transparent">
-                    <button>Modificar</button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Modificar</button>
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
-        <!-- <div class="col-sm-4">
-            <div class="card card3 border-info mb-3" style="max-width: 18rem;">
-                <div class="card-header">ID</div>
-                <div class="card-body text-info">
-                    <h5 class="card-title">Nombre puto de compra</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's
-                        content.</p>
-                </div>
-                <div class="card-footer bg-transparent go-corner">
-                    <button>Modificar</button>
-                </div>
-            </div>
-        </div> -->
     </div>
 </div>

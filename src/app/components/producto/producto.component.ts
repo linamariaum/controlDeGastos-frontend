@@ -7,6 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductoComponent implements OnInit {
 
+  elementos: any = [];
+  busqueda: any = {
+    tipo: 'codigo',
+    busqueda: '',
+    fecha: ''
+  };
+  error = false;
+
   constructor() { }
 
   cards = [
@@ -54,5 +62,49 @@ export class ProductoComponent implements OnInit {
   
   ngOnInit() {
     this.slides = this.chunk(this.cards, 3);
+    this.buscarTodos();
+  }
+
+  buscarTodos() {
+    this.busqueda = {
+      tipo: 'codigo',
+      busqueda: '',
+      fecha: ''
+    };
+  }
+
+  cambioDeBusqueda() {
+    this.busqueda.busqueda = '';
+    this.busqueda.fecha = '';
+  }
+
+  buscar() {
+    switch (this.busqueda.tipo) {
+      case 'codigo':
+        this.busquedaPorCodigo();
+        break;
+      case 'nombre':
+        this.busquedaPorProducto();
+        break;
+      case 'fechas':
+        this.busquedaPorFechas();
+        break;
+    }
+  }
+
+  busquedaPorCodigo() {
+  }
+
+  busquedaPorProducto() {
+  }
+
+  busquedaPorFechas() {
+    let fechas = {
+      startDate: `${this.busqueda.fecha[0].getFullYear()}/${this.busqueda.fecha[0].getMonth() + 1}/${this.busqueda.fecha[0].getDate()}`,
+      endDate: `${this.busqueda.fecha[1].getFullYear()}/${this.busqueda.fecha[1].getMonth() + 1}/${this.busqueda.fecha[1].getDate()}`
+    };
+  }
+
+  eliminarCompra(id: string) {
   }
 }

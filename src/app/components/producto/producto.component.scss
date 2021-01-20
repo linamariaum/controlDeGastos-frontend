@@ -2,6 +2,27 @@
     transition: all 0.3s ease-out;
 }
 
+.principal {
+    margin-top: 2em;
+    margin-bottom: 3em;
+    padding-top: 2em;
+    background-color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.boton-nav {
+    text-decoration: none;
+    padding: 0.5em;
+    border-radius: 6px;
+    color: #000;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.boton-nav:hover {
+    background-color: #e1e1e1;
+}
+
 .container {
     padding-bottom: 1rem;
 }
@@ -18,8 +39,9 @@
     padding-top: 2rem;
 }
 
-.btn-secondary {
+.btn-secondary, .btn-outline-secondary {
     margin-top: 2rem;
+    margin-left: .5rem;
 }
 
 .btn-primary {
@@ -34,6 +56,7 @@
 }
 
 .btn-outline-primary {
+    margin-top: 2rem;
     border-color: #00B6A2;
     color: #00B6A2;
 }

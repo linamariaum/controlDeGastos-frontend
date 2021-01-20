@@ -19,6 +19,8 @@
                     <select id="almacenid" class="custom-select" required [(ngModel)]="compra.almacenid"
                         name="almacenid" #almacenid>
                         <option *ngFor="let almacen of listaAlmacenes" [ngValue]="almacen.id">{{almacen.name}}</option>
+                        <option>Punto de compra 1</option>
+                        <option>Punto de compra 2</option>
                     </select>
                 </div>
 
@@ -138,14 +140,35 @@
                                                         [disabled]="activarCamposCompra" name="estadoProducto"
                                                         #estadoProducto placeholder="Estado...">
                                                         <option disabled [ngValue]="null">Seleccionar...</option>
-                                                        <option value="Nuevo">Nuevo</option>
-                                                        <option value="Usado">Usado</option>
+                                                        <option value="Nuevo">Mantenimiento</option>
+                                                        <option value="Usado">Administración</option>
                                                     </select>
                                                 </div>
                                             </div>
                                         </div>
+                                        <hr>
                                         <div class="row">
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-12">
+                                                <div class="contenedor-boton">
+                                                    <a class="registrar-compra-boton boton-nav" [routerLink]="[]">
+                                                        <svg class="bi bi-plus-circle" style="color: #00B6A2;margin-right: 0.5em;" width="1.3em"
+                                                            height="1.3em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                            <path fill-rule="evenodd"
+                                                                d="M8 3.5a.5.5 0 01.5.5v4a.5.5 0 01-.5.5H4a.5.5 0 010-1h3.5V4a.5.5 0 01.5-.5z"
+                                                                clip-rule="evenodd" />
+                                                            <path fill-rule="evenodd" d="M7.5 8a.5.5 0 01.5-.5h4a.5.5 0 010 1H8.5V12a.5.5 0 01-1 0V8z"
+                                                                clip-rule="evenodd" />
+                                                            <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z"
+                                                                clip-rule="evenodd" />
+                                                        </svg> Crear producto
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h6>Producto existente</h6>
+                                        <div class="row">
+                                            
+                                            <div class="col-sm-4">
                                                 <div class="input-group mb-2">
                                                     <div class="input-group-prepend">
                                                         <label class="input-group-text" for="almacenid">Producto</label>
@@ -160,20 +183,20 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-6">
-                                                <div class="contenedor-boton">
-                                                    <a class="registrar-compra-boton boton-nav" [routerLink]="[]">
-                                                        <svg class="bi bi-plus-circle" style="color: #00B6A2;margin-right: 0.5em;" width="1.3em"
-                                                            height="1.3em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd"
-                                                                d="M8 3.5a.5.5 0 01.5.5v4a.5.5 0 01-.5.5H4a.5.5 0 010-1h3.5V4a.5.5 0 01.5-.5z"
-                                                                clip-rule="evenodd" />
-                                                            <path fill-rule="evenodd" d="M7.5 8a.5.5 0 01.5-.5h4a.5.5 0 010 1H8.5V12a.5.5 0 01-1 0V8z"
-                                                                clip-rule="evenodd" />
-                                                            <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z"
-                                                                clip-rule="evenodd" />
-                                                        </svg> Crear producto
-                                                    </a>
+                                            <div class="col-sm-4">
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="basic-addon1">Cantidad</span>
+                                                    </div>
+                                                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="basic-addon1">Precio unitario</span>
+                                                    </div>
+                                                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
                                                 </div>
                                             </div>
                                         </div>
