@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CategoriaService } from '../../services/categoria.service';
 
 @Component({
   selector: 'app-categoria',
@@ -19,7 +20,7 @@ export class CategoriaComponent implements OnInit {
   };
   error = false;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private categoriaService: CategoriaService) { }
 
   ngOnInit(): void {
     this.buscarTodos();
