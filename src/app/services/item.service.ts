@@ -18,8 +18,8 @@ export class ItemService {
     });
   }
 
-  consultarItems(usuario): Observable<any> {
-    return this.http.get(environment.APIUrl + '/api/items/');
+  consultarItems(id: number): Observable<any> {
+    return this.http.get(environment.APIUrl + '/api/items/usuario/' + id);
   }
 
   consultarItem(idCategoria: number, idItem: number): Observable<any> {

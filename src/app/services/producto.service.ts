@@ -20,8 +20,8 @@ export class ProductoService {
     });
   }
 
-  consultarProductoServicios(usuario): Observable<any> {
-    return this.http.get(environment.APIUrl + '/api/productoServicios/');
+  consultarProductoServicios(id): Observable<any> {
+    return this.http.get(environment.APIUrl + '/api/productoServicios/usuario/' + id);
   }
 
   consultarProductoServicio(id: number): Observable<any> {

@@ -22,20 +22,40 @@ export class MovimientoService {
     });
   }
 
-  consultarMovimientos(usuario): Observable<any> {
-    return this.http.get(environment.APIUrl + '/api/movimientos/');
+  consultarMovimientos(idUsuario: number): Observable<any> {
+    return this.http.get(environment.APIUrl + '/api/movimientos/usuario/' + idUsuario);
   }
 
-  consultarMovimientoPorProducto(idUsuario: number, idProductoServicio: number): Observable<any> {
-    return this.http.get(environment.APIUrl + '/api/movimientos/' + idUsuario + '/' + idProductoServicio);
+  consultarMovimiento(id: number): Observable<any> {
+    return this.http.get(environment.APIUrl + '/api/movimientos/' + id);
   }
 
-  consultarMovimientoPorPunto(idUsuario: number, idPuntoCompra: number): Observable<any> {
-    return this.http.get(environment.APIUrl + '/api/movimientos/' + idUsuario + '/' + idPuntoCompra);
+  consultarMovimientosPorProducto(idUsuario: number, idProductoServicio: number): Observable<any> {
+    return this.http.get(environment.APIUrl + '/api/movimientos/usuario/' + idUsuario + '/producto/' + idProductoServicio);
   }
 
-  consultarMovimientoPorTipo(idUsuario: number, tipoMovimiento: number): Observable<any> {
-    return this.http.get(environment.APIUrl + '/api/movimientos/' + idUsuario + '/' + tipoMovimiento);
+  consultarMovimientosPorPuntoDeCompra(idUsuario: number, idPuntoDeCompra: number): Observable<any> {
+    return this.http.get(environment.APIUrl + '/api/movimientos/usuario/' + idUsuario + '/punto-compra' + idPuntoDeCompra);
+  }
+
+  consultarMovimientosPorTipoMovimiento(idUsuario: number, tipoMovimiento: number): Observable<any> { /**ENDPOINT ? */
+    return this.http.get(environment.APIUrl + '/api/movimientos/usuario/' + idUsuario + '/' + tipoMovimiento);
+  }
+
+  consultarMovimientosPorFechas(idUsuario: number, fechaInicial: string, fechaFinal: string): Observable<any> { /**ENDPOINT ? */
+    return this.http.get(environment.APIUrl + '/api/movimientos/usuario/' + idUsuario + '/fecha-inicial/' + fechaInicial + '/fecha-final/' + fechaFinal);
+  }
+
+  consultarMovimientosHastaHoy(idUsuario: number, fechaInicial: string): Observable<any> {
+    return this.http.get(environment.APIUrl + '/api/movimientos/usuario/' + idUsuario + '/fecha-inicial/' + fechaInicial);
+  }
+
+  consultarMovimientosPorItem(idUsuario: number, idItem: number): Observable<any> {
+    return this.http.get(environment.APIUrl + '/api/movimientos/usuario/' + idUsuario + '/item/' + idItem);
+  }
+
+  consultarMovimientosPorCategoria(idUsuario: number, idCategoria: number): Observable<any> {
+    return this.http.get(environment.APIUrl + '/api/movimientos/usuario/' + idUsuario + '/categoria/' + idCategoria);
   }
 
   borrar(id: string) {

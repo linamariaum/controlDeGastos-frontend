@@ -18,8 +18,8 @@ export class CategoriaService {
     });
   }
 
-  consultarCategorias(usuario): Observable<any> {
-    return this.http.get(environment.APIUrl + '/api/categorias/');
+  consultarCategorias(id): Observable<any> {
+    return this.http.get(environment.APIUrl + '/api/categorias/usuario/' + id);
   }
 
   consultarCategoria(id: number): Observable<any> {
