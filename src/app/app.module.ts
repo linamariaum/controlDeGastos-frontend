@@ -24,6 +24,7 @@ import { PuntoCompraComponent } from './components/punto-compra/punto-compra.com
 import { ProductoComponent } from './components/producto/producto.component';
 import { MovimientoComponent } from './components/movimiento/movimiento.component';
 import { CrearMovimientoComponent } from './components/movimiento/crear-movimiento/crear-movimiento.component';
+import { ErrorComponent } from './components/shared/error/error.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { CrearMovimientoComponent } from './components/movimiento/crear-movimien
     PuntoCompraComponent,
     ProductoComponent,
     MovimientoComponent,
-    CrearMovimientoComponent
+    CrearMovimientoComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,

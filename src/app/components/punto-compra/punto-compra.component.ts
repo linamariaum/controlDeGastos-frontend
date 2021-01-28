@@ -11,22 +11,27 @@ export class PuntoCompraComponent implements OnInit {
   cards = [
     {
       title: 'Punto 1',
+      id: '167',
       description: 'here comes the description'
     },
     {
       title: 'Punto 2',
+      id: '120',
       description: 'here comes the description'
     },
     {
       title: 'Punto 3',
+      id: '016',
       description: 'here comes the description'
     },
     {
       title: 'Punto 4',
+      id: '228',
       description: 'here comes the description'
     },
     {
       title: 'Punto 5',
+      id: '072',
       description: 'here comes the description'
     }
   ];

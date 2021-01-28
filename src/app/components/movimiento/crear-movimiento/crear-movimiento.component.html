@@ -25,13 +25,12 @@
                 </div>
 
             </div>
-            <h2>Lista de productos</h2>
+            <h2>Lista de productos / servicios</h2>
             <table class="table" id="tabla-productos">
                 <thead>
                     <tr>
                         <th scope="col">Código</th>
                         <th scope="col" class="quitar">Nombre</th>
-                        <th scope="col" class="quitar">Unidad</th>
                         <th scope="col">Precio unitario</th>
                         <th scope="col">Cantidad</th>
                         <th scope="col" class="quitar">Precio neto</th>
@@ -42,7 +41,6 @@
                     <tr *ngFor="let producto of productosAgrgadosCompleto">
                         <th scope="row">{{producto.referencia}}</th>
                         <td class="quitar">{{producto.nombre}}</td>
-                        <td class="quitar">{{producto.marca}}</td>
                         <td>{{producto.precioUnitario | currency}}</td>
                         <td>{{producto.cantidadDisponible}}</td>
                         <td class="quitar">{{(producto.precioUnitario * producto.cantidadDisponible) | currency}}</td>
@@ -60,6 +58,22 @@
                         </td>
                     </tr>
                     <tr>
+                        <td>402</td>
+                        <td>Pantalon</td>
+                        <td>$80.000</td>
+                        <td>1</td>
+                        <td>$80.000</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>277</td>
+                        <td>Camisa</td>
+                        <td>$20.000</td>
+                        <td>3</td>
+                        <td>$60.000</td>
+                        <td></td>
+                    </tr>
+                    <tr>
                         <th>
                             <svg data-toggle="modal" data-target="#modalProducoCompra" (click)="limbiarCampos()"
                                 class="bi bi-plus-circle" style="color: #00B6A2" viewBox="0 0 16 16" fill="currentColor"
@@ -75,13 +89,13 @@
                                     clip-rule="evenodd" />
                             </svg>
                         </th>
-                        <th class="quitar"></th>
                         <th></th>
                         <th class="quitar"></th>
                         <th>Total:</th>
-                        <td>{{compra.neto | currency}}</td>
+                        <td>$140.000</td>
                         <td></td>
                     </tr>
+                    
 
                 </tbody>
             </table>
@@ -102,7 +116,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="modalProducoCompraLabel">Agregar producto</h4>
+                    <h4 class="modal-title" id="modalProducoCompraLabel">Agregar producto/servicio</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -160,18 +174,18 @@
                                                                 clip-rule="evenodd" />
                                                             <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z"
                                                                 clip-rule="evenodd" />
-                                                        </svg> Crear producto
+                                                        </svg> Crear producto/servicio
                                                     </a>
                                                 </div>
                                             </div>
                                         </div>
-                                        <h6>Producto existente</h6>
+                                        <h6>Producto/servicio existente</h6>
                                         <div class="row">
                                             
                                             <div class="col-sm-4">
                                                 <div class="input-group mb-2">
                                                     <div class="input-group-prepend">
-                                                        <label class="input-group-text" for="almacenid">Producto</label>
+                                                        <label class="input-group-text" for="almacenid">Producto/servicio</label>
                                                     </div>
                                                     <select id="almacenid" class="custom-select" required
                                                         [(ngModel)]="productoBuscado.estado"
@@ -188,7 +202,7 @@
                                                     <div class="input-group-prepend">
                                                     <span class="input-group-text" id="basic-addon1">Cantidad</span>
                                                     </div>
-                                                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                                                    <input type="text" class="form-control" placeholder="Cantidad" aria-label="Username" aria-describedby="basic-addon1">
                                                 </div>
                                             </div>
                                             <div class="col-sm-4">
@@ -196,7 +210,7 @@
                                                     <div class="input-group-prepend">
                                                     <span class="input-group-text" id="basic-addon1">Precio unitario</span>
                                                     </div>
-                                                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                                                    <input type="text" class="form-control" placeholder="Precio unitario" aria-label="Username" aria-describedby="basic-addon1">
                                                 </div>
                                             </div>
                                         </div>
@@ -218,4 +232,7 @@
     </div>
 </div>
 
-<!-- <app-error *ngIf="error"></app-error> -->
+<!-- <app-error *ngIf="error"></app-error> 
+        {{compra.neto | currency}}
+
+-->
