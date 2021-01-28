@@ -9,9 +9,6 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { AppComponent } from './app.component';
 import { UsuarioService } from './services/usuario.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { UsuarioComponent } from './components/usuario/usuario.component';
-import { LoginComponent } from './components/usuario/login/login.component';
-import { RegistroComponent } from './components/usuario/registro/registro.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './components/home/home.component';
 import { CategoriaComponent } from './components/categoria/categoria.component';
@@ -29,9 +26,6 @@ import { ErrorComponent } from './components/shared/error/error.component';
 @NgModule({
   declarations: [
     AppComponent,
-    UsuarioComponent,
-    LoginComponent,
-    RegistroComponent,
     HomeComponent,
     CategoriaComponent,
     ItemComponent,

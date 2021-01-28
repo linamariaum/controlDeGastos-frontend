@@ -1,37 +1,45 @@
 import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders, } from '@angular/common/http';
-//import { Response } from "@angular/http";
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { User } from '../model/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
 
-  readonly rootUrl = 'http://localhost:35257';
   constructor(private http: HttpClient) { }
 
-  registerUser(user: User) {
-    const body: User = {
-      UserName: user.UserName,
-      Password: user.Password,
-      Email: user.Email,
-      FirstName: user.FirstName,
-      LastName: user.LastName
-    }
-    var reqHeader = new HttpHeaders({'No-Auth':'True'});
-    return this.http.post(this.rootUrl + '/api/User/Register', body,{headers : reqHeader});
+  crearUsuario(usuario): Observable<any> {
+    return this.http.post(environment.APIUrl + '/api/usuarios/', {
+      clave: usuario.clave,
+      correo: usuario.correo,
+      nombre: usuario.nombre,
+      rol: usuario.rol
+    });
   }
 
-  userAuthentication(userName, password) {
-    var data = "username=" + userName + "&password=" + password + "&grant_type=password";
-    var reqHeader = new HttpHeaders({ 'Content-Type': 'application/x-www-urlencoded','No-Auth':'True' });
-    return this.http.post(this.rootUrl + '/token', data, { headers: reqHeader });
+  consultarUsuarios(): Observable<any> {
+    return this.http.get(environment.APIUrl + '/api/usuarios/usuario/');
   }
 
-  getUserClaims(){
-   return  this.http.get(this.rootUrl+'/api/GetUserClaims');
-  } 
+  consultarUsuario(id: number): Observable<any> {
+    return this.http.get(environment.APIUrl + '/api/usuarios/' + id);
+  }
+
+  loginUser(body): Observable<any> {
+    return this.http.post(environment.APIUrl + '/api/usuarios/login', {
+      /************************************ */
+    });
+  }
+
+  actualizarUsuario(id: number, usuario): Observable<any> {
+    return this.http.post(environment.APIUrl + '/api/usuarios/' + id, {
+      clave: usuario.clave,
+      correo: usuario.correo,
+      nombre: usuario.nombre,
+      rol: usuario.rol
+    });
+  }
+
 }

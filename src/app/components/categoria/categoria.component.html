@@ -161,7 +161,7 @@
                                   <input type="text" class="form-control" value={{categoria.nombre}} required [(ngModel)]="categoriaActualizada.nombre" name="nombre">
                                 </div>
                                 <div class="form-group">
-                                  <label for="descripCategoria">Descripción</label>
+                                  <label for="descripCategoria">Descripción: {{categoria.descripcion}}</label>
                                   <textarea class="form-control" placeholder="" id="descripcion" [(ngModel)]="categoriaActualizada.descripcion" name="descripcion" rows="3">{{categoria.descripcion}}</textarea>
                                 </div>
                             </form>
@@ -170,7 +170,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-primary boton-secundario-modal" [disabled]="!(categoriaActualizada.nombre != '')" [swal]="confirmarMod">Modificar</button>
+                <button type="button" class="btn btn-outline-primary boton-secundario-modal" [disabled]="!(categoriaActualizada.nombre != '' || categoriaActualizada.descripcion != '')" [swal]="confirmarMod">Modificar</button>
             </div>
         </div>
     </div>

@@ -14,7 +14,10 @@ export class CategoriaComponent implements OnInit {
     nombre: '',
     tipoCreacion: '1'
   };
-  categoriaActualizada : any = {};
+  categoriaActualizada : any = {
+    nombre: '',
+    descripcion: ''
+  };
   categorias : any = [];
   elementos: any = [];
   busqueda: any = {
@@ -97,6 +100,12 @@ export class CategoriaComponent implements OnInit {
 
   modificarCategoria(){
     this.categoriaActualizada.tipoCreacion = this.categoria.tipoCreacion;
+    if (this.categoriaActualizada.nombre == '' ) {
+      this.categoriaActualizada.nombre = this.categoria.nombre;
+    }
+    if (this.categoriaActualizada.descripcion == '' ) {
+      this.categoriaActualizada.descripcion = this.categoria.descripcion;
+    }
     console.log(this.categoriaActualizada);
     this.categoriaService.actualizarCategoria(this.categoria.id, this.categoria).subscribe(data => {
       this.error = false;
