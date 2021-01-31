@@ -12,6 +12,7 @@ export class CategoriaComponent implements OnInit {
   categoria : any = {};
   nuevaCategoria : any = {
     nombre: '',
+    descripcion: '',
     tipoCreacion: '1'
   };
   categoriaActualizada : any = {
@@ -19,7 +20,6 @@ export class CategoriaComponent implements OnInit {
     descripcion: ''
   };
   categorias : any = [];
-  elementos: any = [];
   busqueda: any = {
     tipo: 'codigo',
     busqueda: ''
@@ -60,7 +60,7 @@ export class CategoriaComponent implements OnInit {
     ];
     /*this.categoriaService.consultarCategorias(this.usuarioId).subscribe(data => {
       this.error = false;
-      this.elementos = data;
+      this.categorias = data;
     }, err => {
       this.error = true;
     });*/
@@ -84,7 +84,7 @@ export class CategoriaComponent implements OnInit {
   busquedaPorCodigo() {
     this.categoriaService.consultarCategoria(this.busqueda.busqueda).subscribe(data => {
       this.error = false;
-      this.elementos = data;
+      this.categorias = data;
     }, err => {
       this.error = true;
     });
@@ -107,7 +107,7 @@ export class CategoriaComponent implements OnInit {
       this.categoriaActualizada.descripcion = this.categoria.descripcion;
     }
     console.log(this.categoriaActualizada);
-    this.categoriaService.actualizarCategoria(this.categoria.id, this.categoria).subscribe(data => {
+    this.categoriaService.actualizarCategoria(this.categoria.id, this.categoriaActualizada).subscribe(data => {
       this.error = false;
     }, err => {
       this.error = true;

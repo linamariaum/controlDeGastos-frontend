@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CategoriaService } from '../../services/categoria.service';
+import { ItemService } from '../../services/item.service';
+import { ProductoService } from '../../services/producto.service';
 
 @Component({
   selector: 'app-producto',
@@ -8,47 +11,26 @@ import { Component, OnInit } from '@angular/core';
 export class ProductoComponent implements OnInit {
 
   elementos: any = [];
+  productos: any = [];
   busqueda: any = {
     tipo: 'codigo',
-    busqueda: '',
-    fecha: ''
+    busqueda: ''
   };
   error = false;
+  categorias: any = [];
+  nuevoProdSer: any = {
+    nombre: '',
+    descripcion: ''
+  };
+  usuarioId: any;
+  producto: any = {};
+  prodSerActualizado : any = {
+    nombre: '',
+    descripcion: '',
+    unidad: ''
+  };
 
-  constructor() { }
-
-  cards = [
-    {
-      title: 'Producto 1',
-      description: 'here comes the description',
-      buttonText: 'Button',
-      img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'
-    },
-    {
-      title: 'Producto 2',
-      description: 'here comes the description',
-      buttonText: 'Button',
-      img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'
-    },
-    {
-      title: 'Producto 3',
-      description: 'here comes the description',
-      buttonText: 'Button',
-      img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'
-    },
-    {
-      title: 'Producto 4',
-      description: 'here comes the description',
-      buttonText: 'Button',
-      img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'
-    },
-    {
-      title: 'Producto 5',
-      description: 'here comes the description',
-      buttonText: 'Button',
-      img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'
-    }
-  ];
+  constructor(private categoriaService: CategoriaService, private itemService: ItemService, private productoService: ProductoService) { }
 
   slides: any = [[]];
 
@@ -61,21 +43,103 @@ export class ProductoComponent implements OnInit {
   }
   
   ngOnInit() {
-    this.slides = this.chunk(this.cards, 3);
+    this.productos = [
+      {
+        id: '1',
+        nombre: 'Producto 1',
+        descripcion: 'here comes the description',
+        idItem: '1',
+        idCategoria: '1',
+        unidad: 'gramos'
+      },
+      {
+        id: '2',
+        nombre: 'Producto 2',
+        descripcion: 'here comes the description',
+        idItem: '3',
+        idCategoria: '1',
+        unidad: 'gramos'
+      },
+      {
+        id: '3',
+        nombre: 'Producto 3',
+        descripcion: 'here comes the description',
+        idItem: '1',
+        idCategoria: '2',
+        unidad: 'gramos'
+      },
+      {
+        id: '4',
+        nombre: 'Producto 4',
+        descripcion: 'here comes the description',
+        idItem: '2',
+        idCategoria: '3',
+        unidad: 'gramos'
+      }
+    ];
     this.buscarTodos();
+    this.slides = this.chunk(this.productos, 3);
+    
   }
 
   buscarTodos() {
     this.busqueda = {
       tipo: 'codigo',
-      busqueda: '',
-      fecha: ''
+      busqueda: ''
     };
+
+    this.categorias = [
+      {
+        id: '1',
+        nombre: 'Categoria 1',
+        descripcion: 'here comes the description',
+        tipoCreacion: '1'
+      },
+      {
+        id: '2',
+        nombre: 'Categoria 2',
+        descripcion: 'here comes the description',
+        tipoCreacion: '1'
+      },
+      {
+        id: '3',
+        nombre: 'Categoria 3',
+        descripcion: 'here comes the description',
+        tipoCreacion: '1'
+      }
+    ];
+
+    this.elementos = [
+      {
+        idItem: '1',
+        nombre: 'Item 1',
+        descripcion: 'here comes the description',
+        idCategoria: '1'
+      },
+      {
+        idItem: '2',
+        nombre: 'Item 2',
+        descripcion: 'here comes the description',
+        idCategoria: '1'
+      },
+      {
+        idItem: '3',
+        nombre: 'Item 3',
+        descripcion: 'here comes the description',
+        idCategoria: '2'
+      }
+    ];
+
+    /*this.productoService.consultarProductoServicios(this.usuarioId).subscribe(data => {
+      this.error = false;
+      this.productos = data;
+    }, err => {
+      this.error = true;
+    });*/
   }
 
   cambioDeBusqueda() {
     this.busqueda.busqueda = '';
-    this.busqueda.fecha = '';
   }
 
   buscar() {
@@ -83,28 +147,73 @@ export class ProductoComponent implements OnInit {
       case 'codigo':
         this.busquedaPorCodigo();
         break;
-      case 'nombre':
-        this.busquedaPorProducto();
+      case 'categoria':
+        this.busquedaPorCategoria();
         break;
-      case 'fechas':
-        this.busquedaPorFechas();
+      case 'item':
+        this.busquedaPorItem();
         break;
     }
   }
 
   busquedaPorCodigo() {
+    this.productoService.consultarProductoServicio(this.busqueda.busqueda).subscribe(data => {
+      this.error = false;
+      this.productos = data;
+    }, err => {
+      this.error = true;
+    });
   }
 
-  busquedaPorProducto() {
+  busquedaPorCategoria() {
+    this.productoService.consultarProductoServicioPorCategoria(this.busqueda.busqueda).subscribe(data => {
+      this.error = false;
+      this.productos = data;
+    }, err => {
+      this.error = true;
+    });
   }
 
-  busquedaPorFechas() {
-    let fechas = {
-      startDate: `${this.busqueda.fecha[0].getFullYear()}/${this.busqueda.fecha[0].getMonth() + 1}/${this.busqueda.fecha[0].getDate()}`,
-      endDate: `${this.busqueda.fecha[1].getFullYear()}/${this.busqueda.fecha[1].getMonth() + 1}/${this.busqueda.fecha[1].getDate()}`
-    };
+  busquedaPorItem() {
+    this.productoService.consultarProductoServicioPorItem(this.busqueda.busqueda).subscribe(data => {
+      this.error = false;
+      this.productos = data;
+    }, err => {
+      this.error = true;
+    });
   }
 
-  eliminarCompra(id: string) {
+  capturar(producto){
+    this.producto = producto;
+    console.log(this.producto);
+  }
+
+  crearProdSer(){
+    console.log(this.nuevoProdSer);
+    this.productoService.crearProductoServicio(this.nuevoProdSer).subscribe(data => {
+      this.error = false;
+    }, err => {
+      this.error = true;
+    });
+  }
+
+  modificarProducto(){
+    this.prodSerActualizado.idCategoria = this.producto.idCategoria;
+    this.prodSerActualizado.idItem = this.producto.idItem;
+    if (this.prodSerActualizado.nombre == '' ) {
+      this.prodSerActualizado.nombre = this.producto.nombre;
+    }
+    if (this.prodSerActualizado.descripcion == '' ) {
+      this.prodSerActualizado.descripcion = this.producto.descripcion;
+    }
+    if (this.prodSerActualizado.unidad == '' ) {
+      this.prodSerActualizado.unidad = this.producto.unidad;
+    }
+    console.log(this.prodSerActualizado);
+    this.productoService.actualizarProductoServicio(this.producto.id, this.prodSerActualizado).subscribe(data => {
+      this.error = false;
+    }, err => {
+      this.error = true;
+    });
   }
 }

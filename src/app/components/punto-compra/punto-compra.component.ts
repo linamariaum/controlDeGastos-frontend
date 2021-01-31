@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PuntoCompraService } from '../../services/punto-compra.service';
 
 @Component({
   selector: 'app-punto-compra',
@@ -36,7 +37,14 @@ export class PuntoCompraComponent implements OnInit {
     }
   ];
   
-  constructor() { }
+  nuevoPunto: any = {
+    nombre: '',
+    descripcion: '',
+    estratoEconomico: ''
+  };
+  error = false;
+
+  constructor(private puntoCompraService: PuntoCompraService) { }
 
   ngOnInit(): void {
   }
@@ -44,6 +52,16 @@ export class PuntoCompraComponent implements OnInit {
   capturar(card){
     this.punto = card;
   }
+
+  crearPunto(){
+    console.log(this.nuevoPunto);
+    this.puntoCompraService.crearPuntoDeCompra(this.nuevoPunto).subscribe(data => {
+      this.error = false;
+    }, err => {
+      this.error = true;
+    });
+  }
+
 
   deleteFile(){}
 }
