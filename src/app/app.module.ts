@@ -1,19 +1,21 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { FormsModule} from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 import { AppComponent } from './app.component';
+import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
+import { AppAuthGuard } from './shared/auth/app.authguard';
+import { AppRoutingModule } from './app-routing.module';
+import { initializeKeycloak } from './shared/auth/keycloak-initializer';
+import { SeguroComponent } from './seguro/seguro.component';
 import { UsuarioService } from './services/usuario.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './components/home/home.component';
 import { CategoriaComponent } from './components/categoria/categoria.component';
-//import { AuthGuard } from './auth/auth.guard';
-//import { AuthInterceptor } from './auth/auth.interceptor';
 
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ItemComponent } from './components/item/item.component';
@@ -36,6 +38,7 @@ import { ModificarMovimientoComponent } from './components/movimiento/modificar-
     CrearMovimientoComponent,
     ErrorComponent,
     ModificarMovimientoComponent
+    SeguroComponent
   ],
   imports: [
     BrowserModule,
@@ -46,15 +49,19 @@ import { ModificarMovimientoComponent } from './components/movimiento/modificar-
     AppRoutingModule,
     TooltipModule.forRoot(),
     ToastrModule.forRoot(),
+    KeycloakAngularModule,
     SweetAlert2Module.forRoot()
   ],
-  providers: [UsuarioService, /*AuthGuard,
-    ,
+  providers: [
+    AppAuthGuard,
     {
-      provide : HTTP_INTERCEPTORS,
-      //useClass : AuthInterceptor,
-      multi : true
-    }*/],
+      provide: APP_INITIALIZER,
+      useFactory: initializeKeycloak,
+      multi: true,
+      deps: [KeycloakService]
+    },
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

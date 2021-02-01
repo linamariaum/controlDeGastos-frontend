@@ -1,49 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import * as jQuery from 'jquery';
+import { Router } from '@angular/router';
+import { KeycloakService } from 'keycloak-angular';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'controlDeGastos-frontend';
-  private roles: string[];
-  isLoggedIn = true;
-  username: string;
-  idUser: string;
-  avatar: string;
-  UsuarioId = [];
-  constructor() { }
 
-  ngOnInit() {
-    this.username = "Pepita Perez";
-    this.idUser = "100384221";
+  constructor( private router: Router,
+    private keycloakService: KeycloakService) {}
 
-    var contenerdor = document.getElementById("container-login");
-    var oculto = document.getElementById("menu-toggle");
-
-    if (this.isLoggedIn == false) {
-      contenerdor.style.backgroundColor = "#0096CE";
-      contenerdor.style.height = "100%";
-      oculto.style.display = "none"
-    } else {
-      contenerdor.style.backgroundColor = "#dddada"
-    }
-
-    jQuery("#menu-toggle").click(function (e) {
-      e.preventDefault();
-      jQuery("#wrapper").toggleClass("toggled");
-    });
-
+  async ngOnInit() {
+    console.log(await this.keycloakService.loadUserProfile())
   }
 
   logout() {
-    console.log("Te fuiste");
+    this.keycloakService.logout(environment.serverUrl);
+    localStorage.clear();
   }
 
-
-  editUser(id) {
-    console.log("A editar!!");
+  irASeguro() {
+    this.router.navigate(['/seguro']);
   }
+
 }
