@@ -20,65 +20,59 @@ export class CrearMovimientoComponent implements OnInit {
   usuarioId: any;
   producto: any = {};
   categoria: any = {};
-  movimiento: any = {};
+  movimiento: any = {
+    total: 0
+  };
   puntos: any = [];
   productosAgregados: any = [];
-
-  /**************************************************************************** */
-  listaAlmacenes: any = [];
-  productosCompra: any = [];
-  productoCompra: any = {};
-  productosNuevos: any = [];
-  productoNuevo: any = {};
-  productosAgrgadosCompleto: any = [];
-  productoBuscado: any = {
-    estado: null
+  productoAgregar: any = {
+    cantidad: '',
+    precioUnitario: ''
   };
-  compra: any = {
-    neto: 0
-  };
-  esProductoNuevo = false;
-  activarCamposCompra = false;
-  productosNuevosGuardados = 0;
-  cantidad = 0;
-  infoProducCompleta = true;
-  infoCompraCompleta = true;
   guardando = false;
   error = false;
+
+  /**************************************************************************** */
+  
+  productoBuscado: any = {
+    estado: null
+  };  
 
   constructor(private router: Router, private categoriaService: CategoriaService, private itemService: ItemService, private productoService: ProductoService, private puntoCompraService: PuntoCompraService, private movimientoService: MovimientoService) { }
 
   ngOnInit(): void {
 
+    //this.listarPuntos();
+    
     /** JSON */
 
   this.puntos = [
     {
       nombre: 'Punto 1',
-      id: '167',
+      id: 167,
       descripcion: 'here comes the description'
     },
     {
       nombre: 'Punto 2',
-      id: '120',
+      id: 120,
       descripcion: 'here comes the description',
       estratoEconomico: '3'
     },
     {
       nombre: 'Punto 3',
-      id: '016',
+      id: 16,
       descripcion: 'here comes the description',
       estratoEconomico: '3'
     },
     {
       nombre: 'Punto 4',
-      id: '228',
+      id: 28,
       descripcion: 'here comes the description',
       estratoEconomico: '2'
     },
     {
       nombre: 'Punto 5',
-      id: '072',
+      id: 72,
       descripcion: 'here comes the description',
       estratoEconomico: '3'
     }
@@ -169,16 +163,42 @@ export class CrearMovimientoComponent implements OnInit {
   }
 
   agregarProducto() {
-    this.productoBuscado.cantidadDisponible = this.cantidad;
-    this.eliminarProducto(this.productoBuscado);
+    /*this.productoService.consultarProductoServicio(this.productoAgregar.idProductoServicio).subscribe(data => {
+      this.error = false;
+      this.productoAgregar.nombre = data[0].nombre;
+    }, err => {
+      this.error = true;
+    });*/
+    this.productoAgregar.neto = this.productoAgregar.cantidad * this.productoAgregar.precioUnitario;
+    this.productosAgregados.push(this.productoAgregar);
+    console.log(this.productosAgregados);
+    this.movimiento.total += this.productoAgregar.neto;
+    //this.eliminarProducto(this.productoBuscado);
   }
 
-  eliminarProducto(item: any) {
+  eliminarProducto(produc: any) {
+    this.productosAgregados = this.productosAgregados
+      .filter(producto => ((producto.idProductoServicio != produc.idProductoServicio) ));
+    this.movimiento.total -= produc.neto;
   }
 
-  guardarCompra() {
-    this.compra.fecha = this.obtenerFecha();
+  crearMovimiento() {
+    //this.compra.fecha = this.obtenerFecha();
     this.guardando = true;
+    this.movimiento.items = this.productosAgregados;
+    if(this.movimiento.tipoMovimiento == 'informativo'){
+      this.movimiento.tipoMovimiento = 0;
+    }else{
+      this.movimiento.tipoMovimiento = 1;
+    }
+    console.log(this.movimiento);
+    this.movimientoService.crearMovimiento(this.movimiento).subscribe(data => {
+      this.error = false;
+      this.router.navigate(['/movimiento']);
+    }, err => {
+      this.guardando = false;
+      this.error = true;
+    });
   }
 
   obtenerFecha() {
@@ -191,14 +211,11 @@ export class CrearMovimientoComponent implements OnInit {
 
   limpiarCampos() {
     this.listarCategorias();
-    this.productoBuscado = {
-      estado: null
+    this.productoAgregar = {
+      cantidad: '',
+      precioUnitario: ''
     };
-    this.cantidad = 0;
-    this.esProductoNuevo = false;
-    this.activarCamposCompra = false;
   }
-
 
   listarCategorias(){
     this.categoriaService.consultarCategorias(this.usuarioId).subscribe(data => {

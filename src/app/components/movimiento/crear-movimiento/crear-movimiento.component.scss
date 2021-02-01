@@ -131,25 +131,6 @@ svg {
     pointer-events: none;
 }
 
-.botones .guardar-compra {
-    background-color: #25383b;
-    border-color: #25383b;
-}
-
-.botones .guardar-compra:hover {
-    background-color: #105E6D;
-    border-color: #105E6D;
-}
-
-.botones .guardar-compra:disabled {
-    pointer-events: none;
-}
-
-.botones .guardar-compra .guardando {
-    margin: -0.8px;
-    animation: girar 2.5s infinite linear;
-}
-
 @keyframes girar {
     from {
         transform: rotate(0deg);
@@ -204,5 +185,33 @@ svg {
 } */
 
 .guardar-producto:disabled {
+    pointer-events: none;
+}
+
+.btn-outline-primary {
+    border-color: #00B6A2;
+    color: #00B6A2;
+}
+
+.btn-outline-primary:hover, .btn-outline-primary:not(:disabled):not(.disabled):active {
+    background-color: #00B6A2;
+    color: #fff;
+}
+
+.botones .guardar-mov:disabled {
+    pointer-events: none;
+}
+
+.botones .guardar-mov .guardando {
+    margin: -0.8px;
+    animation: girar 2.5s infinite linear;
+}
+
+.botones .cancelar-mov {
+    margin: 0 10px;
+    color: #212529;
+}
+
+.botones .cancelar-mov.desactivado {
     pointer-events: none;
 }

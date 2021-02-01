@@ -93,6 +93,13 @@ export class CategoriaComponent implements OnInit {
   busquedaPorNombre() {
   }
 
+  limpiarCampos() {
+    this.nuevaCategoria = {
+      nombre: '',
+      descripcion: ''
+    };
+  }
+
   capturar(categoria){
     this.categoria = categoria;
     console.log(this.categoria);

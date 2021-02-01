@@ -72,6 +72,10 @@
     color: #fff;
 }
 
+.btn-outline-primary:disabled {
+    pointer-events: none;
+}
+
 .card {
     margin-bottom: 1rem;
 }

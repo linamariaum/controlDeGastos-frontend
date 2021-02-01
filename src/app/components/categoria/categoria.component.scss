@@ -33,6 +33,10 @@
     color: #fff;
 }
 
+.btn-outline-primary:disabled {
+    pointer-events: none;
+}
+
 .row {
     padding-top: 1rem;
 }
