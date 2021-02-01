@@ -28,7 +28,8 @@
                         <select id="categoriaid" class="custom-select" required [(ngModel)]="busqueda.tipo"
                             (change)="cambioDeBusqueda()" name="tipoBusqueda" #tipoBusqueda>
                             <option value="codigo" selected>Código</option>
-                            <option value="tipo movimiento">Tipo de movimiento</option>
+                            <option value="tipo">Tipo de movimiento</option>
+                            <option value="punto">Punto de compra</option>
                             <option value="fechas">Rango de fechas</option>
                         </select>
                         <input class="form-control" type="search" required name="codProducto"
@@ -61,7 +62,7 @@
                             <path fill-rule="evenodd"
                                 d="M8 3a4.995 4.995 0 0 0-4.192 2.273.5.5 0 0 1-.837-.546A6 6 0 0 1 14 8a.5.5 0 0 1-1.001 0 5 5 0 0 0-5-5zM2.5 7.5A.5.5 0 0 1 3 8a5 5 0 0 0 9.192 2.727.5.5 0 1 1 .837.546A6 6 0 0 1 2 8a.5.5 0 0 1 .501-.5z" />
 
-                        </svg> Restablecer
+                        </svg> Listar todos
                     </a>
                 </div>
             </div>
@@ -74,15 +75,17 @@
         <tr>
             <th scope="col" class="colum-cod">Código</th>
             <th scope="col" class="colum-fecha">Fecha</th>
+            <th scope="col" class="colum-fecha">Tipo Movimiento</th>
             <th scope="col" class="colum-precio">Total</th>
-            <th scope="col" class="colum-acciones"></th>
+            <th scope="col" class="colum-acciones">Ver detalles / Modificar</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>23/10/20</td>
-            <td>$120.000</td>
+        <tr *ngFor="let movimiento of movimientos;">
+            <th scope="row">{{movimiento.id}}</th>
+            <td>{{movimiento.fecha}}</td>
+            <td>{{movimiento.tipoMovimiento}}</td>
+            <td>{{movimiento.total}}</td>
             <td>
                 <div class="elementos-acciones">
                     <svg class="bi bi-eye" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
@@ -96,7 +99,7 @@
                     </svg>
 
                     <svg class="bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
-                        xmlns="http://www.w3.org/2000/svg">
+                        xmlns="http://www.w3.org/2000/svg" (click)="modificarMovimiento(movimiento.id)">
                         <path fill-rule="evenodd"
                             d="M11.293 1.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z"
                             clip-rule="evenodd" />

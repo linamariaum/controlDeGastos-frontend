@@ -22,6 +22,7 @@ import { ProductoComponent } from './components/producto/producto.component';
 import { MovimientoComponent } from './components/movimiento/movimiento.component';
 import { CrearMovimientoComponent } from './components/movimiento/crear-movimiento/crear-movimiento.component';
 import { ErrorComponent } from './components/shared/error/error.component';
+import { ModificarMovimientoComponent } from './components/movimiento/modificar-movimiento/modificar-movimiento.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { ErrorComponent } from './components/shared/error/error.component';
     ProductoComponent,
     MovimientoComponent,
     CrearMovimientoComponent,
-    ErrorComponent
+    ErrorComponent,
+    ModificarMovimientoComponent
   ],
   imports: [
     BrowserModule,

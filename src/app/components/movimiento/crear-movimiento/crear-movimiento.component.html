@@ -5,22 +5,21 @@
             <div class="form-row">
                 <div class="input-group col-md-6 mb-2">
                     <div class="input-group-prepend">
-                        <label class="input-group-text elementos-informacion" for="almacenid">Tipo movimiento</label>
+                        <label class="input-group-text elementos-informacion" for="tipoMovimiento">Tipo movimiento</label>
                     </div>
-                    <select class="custom-select" required>
+                    <select class="custom-select" required [(ngModel)]="movimiento.tipoMovimiento" name="tipoMovimiento"
+                    #tipoMovimiento>
                         <option>0</option>
                         <option>1</option>
                     </select>
                 </div>
                 <div class="input-group col-md-6 mb-2">
                     <div class="input-group-prepend">
-                        <label class="input-group-text elementos-informacion" for="almacenid">Punto de compra</label>
+                        <label class="input-group-text elementos-informacion" for="puntoid">Punto de compra</label>
                     </div>
-                    <select id="almacenid" class="custom-select" required [(ngModel)]="compra.almacenid"
-                        name="almacenid" #almacenid>
-                        <option *ngFor="let almacen of listaAlmacenes" [ngValue]="almacen.id">{{almacen.name}}</option>
-                        <option>Punto de compra 1</option>
-                        <option>Punto de compra 2</option>
+                    <select class="custom-select" required [(ngModel)]="movimiento.idPuntoDeCompra"
+                        name="puntoid" #puntoid>
+                        <option *ngFor="let punto of puntos" [ngValue]="punto.id">{{punto.nombre}}</option>
                     </select>
                 </div>
 
@@ -38,12 +37,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let producto of productosAgrgadosCompleto">
-                        <th scope="row">{{producto.referencia}}</th>
+                    <tr *ngFor="let producto of productosAgregados">
+                        <th scope="row">{{producto.id}}</th>
                         <td class="quitar">{{producto.nombre}}</td>
-                        <td>{{producto.precioUnitario | currency}}</td>
-                        <td>{{producto.cantidadDisponible}}</td>
-                        <td class="quitar">{{(producto.precioUnitario * producto.cantidadDisponible) | currency}}</td>
+                        <td>{{producto.valorUnitario | currency}}</td>
+                        <td>{{producto.cantidad}}</td>
+                        <td class="quitar">{{(producto.valorUnitario * producto.cantidad) | currency}}</td>
                         <td>
                             <div class="elementos-acciones">
                                 <svg (click)="eliminarProducto(producto)" class="bi bi-trash" width="1em" height="1em"
@@ -75,7 +74,7 @@
                     </tr>
                     <tr>
                         <th>
-                            <svg data-toggle="modal" data-target="#modalProducoCompra" (click)="limbiarCampos()"
+                            <svg data-toggle="modal" data-target="#modalProducoCompra" (click)="limpiarCampos()"
                                 class="bi bi-plus-circle" style="color: #00B6A2" viewBox="0 0 16 16" fill="currentColor"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
@@ -132,15 +131,16 @@
                                                 <div class="input-group mb-2">
                                                     <div class="input-group-prepend">
                                                         <label class="input-group-text"
-                                                            for="almacenid">Categoria</label>
+                                                            for="categoriaid">Categoria</label>
                                                     </div>
-                                                    <select id="almacenid" class="custom-select" required
-                                                        [(ngModel)]="productoBuscado.estado"
-                                                        [disabled]="activarCamposCompra" name="estadoProducto"
-                                                        #estadoProducto placeholder="Estado...">
-                                                        <option disabled [ngValue]="null">Seleccionar...</option>
+                                                    <select class="custom-select" required
+                                                        [(ngModel)]="movimiento.idCategoria" name="categoriaid"
+                                                        #categoriaid (change)="listarItems()">
+                                                        <option selected [ngValue]="null"></option>
                                                         <option value="Nuevo">Casa</option>
                                                         <option value="Usado">Entretenimiento</option>
+                                                        <option *ngFor="let categoria of categorias" [ngValue]="categoria.id">
+                                                            {{categoria.nombre}}</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -149,19 +149,77 @@
                                                     <div class="input-group-prepend">
                                                         <label class="input-group-text" for="almacenid">Item</label>
                                                     </div>
-                                                    <select id="almacenid" class="custom-select" required
-                                                        [(ngModel)]="productoBuscado.estado"
-                                                        [disabled]="activarCamposCompra" name="estadoProducto"
-                                                        #estadoProducto placeholder="Estado...">
-                                                        <option disabled [ngValue]="null">Seleccionar...</option>
+                                                    <select class="custom-select" required [(ngModel)]="movimiento.idItem" (change)="listarProductos()"[disabled]="movimiento.idCategoria == null" name="itemID" #itemID>
+                                                        <option selected [ngValue]="null"></option>
                                                         <option value="Nuevo">Mantenimiento</option>
                                                         <option value="Usado">Administración</option>
+                                                        <option *ngFor="let item of items" [ngValue]="item.idItem">
+                                                            {{item.nombre}}</option>
                                                     </select>
                                                 </div>
                                             </div>
                                         </div>
                                         <hr>
+                                        
+                                        <h6>Producto/servicio</h6>
                                         <div class="row">
+                                            
+                                            <div class="col-sm-4">
+                                                <div class="input-group mb-2">
+                                                    <div class="input-group-prepend">
+                                                        <label class="input-group-text" for="productoid">Producto/servicio</label>
+                                                    </div>
+                                                    <select class="custom-select" required [(ngModel)]="movimiento.idProductoServicio" [disabled]="movimiento.idItem == null" name="idProductoServicio" #idProductoServicio>
+                                                        <option selected [ngValue]="null"></option>
+                                                        <option value="Nuevo">Producto 1</option>
+                                                        <option value="Usado">Producto 2</option>
+                                                        <option *ngFor="let producto of productos" [ngValue]="producto.id">
+                                                            {{producto.nombre}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="cantidad">Cantidad</span>
+                                                    </div>
+                                                    <input type="text" class="form-control" placeholder="Cantidad" [disabled]="movimiento.idItem == null">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="precioUnitario">Precio unitario</span>
+                                                    </div>
+                                                    <input type="text" class="form-control" placeholder="Precio unitario" [disabled]="movimiento.idItem == null">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-primary guardar-producto" id="guardar-producto"
+                            [disabled]="!productoForm.form.valid" (click)="agregarProducto()"
+                            data-dismiss="modal">Agregar</button>
+                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <app-error *ngIf="error"></app-error> 
+        {{compra.neto | currency}}
+
+-->
+
+
+<!--<div class="row">
                                             <div class="col-sm-12">
                                                 <div class="contenedor-boton">
                                                     <a class="registrar-compra-boton boton-nav" [routerLink]="[]">
@@ -178,61 +236,4 @@
                                                     </a>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <h6>Producto/servicio existente</h6>
-                                        <div class="row">
-                                            
-                                            <div class="col-sm-4">
-                                                <div class="input-group mb-2">
-                                                    <div class="input-group-prepend">
-                                                        <label class="input-group-text" for="almacenid">Producto/servicio</label>
-                                                    </div>
-                                                    <select id="almacenid" class="custom-select" required
-                                                        [(ngModel)]="productoBuscado.estado"
-                                                        [disabled]="activarCamposCompra" name="estadoProducto"
-                                                        #estadoProducto placeholder="Estado...">
-                                                        <option disabled [ngValue]="null">Seleccionar...</option>
-                                                        <option value="Nuevo">Producto 1</option>
-                                                        <option value="Usado">Producto 2</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <div class="input-group mb-3">
-                                                    <div class="input-group-prepend">
-                                                    <span class="input-group-text" id="basic-addon1">Cantidad</span>
-                                                    </div>
-                                                    <input type="text" class="form-control" placeholder="Cantidad" aria-label="Username" aria-describedby="basic-addon1">
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <div class="input-group mb-3">
-                                                    <div class="input-group-prepend">
-                                                    <span class="input-group-text" id="basic-addon1">Precio unitario</span>
-                                                    </div>
-                                                    <input type="text" class="form-control" placeholder="Precio unitario" aria-label="Username" aria-describedby="basic-addon1">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-outline-primary guardar-producto" id="guardar-producto"
-                            [disabled]="!productoForm.form.valid" (click)="agregarProducto()"
-                            data-dismiss="modal">Agregar</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- <app-error *ngIf="error"></app-error> 
-        {{compra.neto | currency}}
-
--->
+                                        </div>-->

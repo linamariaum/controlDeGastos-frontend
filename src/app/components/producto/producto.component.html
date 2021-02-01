@@ -3,7 +3,7 @@
 <div class="container principal">
   <div class="row">
     <div class="col-lg-12">
-      <a class="registrar-compra-boton boton-nav" href="" data-toggle="modal" data-target="#crearProducto">
+      <a class="registrar-compra-boton boton-nav" href="" data-toggle="modal" data-target="#crearProducto" (click)="listarCategorias()">
         <svg class="bi bi-plus-circle" style="color: #00B6A2;margin-right: 0.5em;" width="1.3em" height="1.3em"
           viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" d="M8 3.5a.5.5 0 01.5.5v4a.5.5 0 01-.5.5H4a.5.5 0 010-1h3.5V4a.5.5 0 01.5-.5z"
@@ -100,7 +100,7 @@
                   <label class="input-group-text" for="almacenid">Categoría</label>
                 </div>
                 <select class="custom-select" required [(ngModel)]="nuevoProdSer.idCategoria" name="categoriaId"
-                  #categoriaId>
+                  #categoriaId (change)="listarItems()">
                   <option [ngValue]="null" selected></option>
                   <option value="Nuevo">Casa</option>
                   <option value="Usado">Entretenimiento</option>
@@ -114,9 +114,9 @@
                 <div class="input-group-prepend">
                   <label class="input-group-text" for="almacenid">Item</label>
                 </div>
-                <select class="custom-select" required [(ngModel)]="nuevoProdSer.idItem" name="itemID" #itemID>
+                <select class="custom-select" required [(ngModel)]="nuevoProdSer.idItem" [disabled]="nuevoProdSer.idCategoria == null" name="itemID" #itemID>
                   <option [ngValue]="null" selected></option>
-                  <option *ngFor="let item of elementos" [ngValue]="item.idItem">
+                  <option *ngFor="let item of items" [ngValue]="item.idItem">
                     {{item.nombre}}</option>
                 </select>
               </div>

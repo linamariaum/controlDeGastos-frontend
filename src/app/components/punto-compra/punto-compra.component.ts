@@ -9,35 +9,46 @@ import { PuntoCompraService } from '../../services/punto-compra.service';
 export class PuntoCompraComponent implements OnInit {
 
   punto: any = {};
+  puntos: any = [];
   cards = [
     {
-      title: 'Punto 1',
+      nombre: 'Punto 1',
       id: '167',
-      description: 'here comes the description'
+      descripcion: 'here comes the description'
     },
     {
-      title: 'Punto 2',
+      nombre: 'Punto 2',
       id: '120',
-      description: 'here comes the description'
+      descripcion: 'here comes the description',
+      estratoEconomico: '3'
     },
     {
-      title: 'Punto 3',
+      nombre: 'Punto 3',
       id: '016',
-      description: 'here comes the description'
+      descripcion: 'here comes the description',
+      estratoEconomico: '3'
     },
     {
-      title: 'Punto 4',
+      nombre: 'Punto 4',
       id: '228',
-      description: 'here comes the description'
+      descripcion: 'here comes the description',
+      estratoEconomico: '2'
     },
     {
-      title: 'Punto 5',
+      nombre: 'Punto 5',
       id: '072',
-      description: 'here comes the description'
+      descripcion: 'here comes the description',
+      estratoEconomico: '3'
     }
   ];
   
   nuevoPunto: any = {
+    nombre: '',
+    descripcion: '',
+    estratoEconomico: ''
+  };
+
+  puntoActualizado: any = {
     nombre: '',
     descripcion: '',
     estratoEconomico: ''
@@ -47,6 +58,16 @@ export class PuntoCompraComponent implements OnInit {
   constructor(private puntoCompraService: PuntoCompraService) { }
 
   ngOnInit(): void {
+    this.buscarTodos();
+  }
+
+  buscarTodos() {
+    this.puntoCompraService.consultarPuntosDeCompra().subscribe(data => {
+      this.error = false;
+      this.puntos = data;
+    }, err => {
+      this.error = true;
+    });
   }
 
   capturar(card){
@@ -62,6 +83,23 @@ export class PuntoCompraComponent implements OnInit {
     });
   }
 
+  modificarPunto(){
+    if (this.puntoActualizado.nombre == '' ) {
+      this.puntoActualizado.nombre = this.punto.nombre;
+    }
+    if (this.puntoActualizado.descripcion == '' ) {
+      this.puntoActualizado.descripcion = this.punto.descripcion;
+    }
+    if (this.puntoActualizado.estratoEconomico == '' ) {
+      this.puntoActualizado.estratoEconomico = this.punto.estratoEconomico;
+    }
+    console.log(this.puntoActualizado);
+    this.puntoCompraService.actualizarPuntoDeCompra(this.punto.id, this.puntoActualizado).subscribe(data => {
+      this.error = false;
+    }, err => {
+      this.error = true;
+    });
+  }
 
   deleteFile(){}
 }

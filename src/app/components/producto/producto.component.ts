@@ -10,7 +10,7 @@ import { ProductoService } from '../../services/producto.service';
 })
 export class ProductoComponent implements OnInit {
 
-  elementos: any = [];
+  items: any = [];
   productos: any = [];
   busqueda: any = {
     tipo: 'codigo',
@@ -29,18 +29,9 @@ export class ProductoComponent implements OnInit {
     descripcion: '',
     unidad: ''
   };
+  categoria: any = {};
 
   constructor(private categoriaService: CategoriaService, private itemService: ItemService, private productoService: ProductoService) { }
-
-  slides: any = [[]];
-
-  chunk(arr, chunkSize) {
-    let R = [];
-    for (let i = 0, len = arr.length; i < len; i += chunkSize) {
-      R.push(arr.slice(i, i + chunkSize));
-    }
-    return R;
-  }
   
   ngOnInit() {
     this.productos = [
@@ -78,7 +69,6 @@ export class ProductoComponent implements OnInit {
       }
     ];
     this.buscarTodos();
-    this.slides = this.chunk(this.productos, 3);
     
   }
 
@@ -109,7 +99,7 @@ export class ProductoComponent implements OnInit {
       }
     ];
 
-    this.elementos = [
+    this.items = [
       {
         idItem: '1',
         nombre: 'Item 1',
@@ -212,6 +202,24 @@ export class ProductoComponent implements OnInit {
     console.log(this.prodSerActualizado);
     this.productoService.actualizarProductoServicio(this.producto.id, this.prodSerActualizado).subscribe(data => {
       this.error = false;
+    }, err => {
+      this.error = true;
+    });
+  }
+
+  listarCategorias(){
+    /*this.categoriaService.consultarCategorias(this.usuarioId).subscribe(data => {
+      this.error = false;
+      this.categorias = data;
+    }, err => {
+      this.error = true;
+    });*/
+  }
+
+  listarItems(){
+    this.itemService.consultarItemsPorCategoria(this.categoria.id).subscribe(data => {
+      this.error = false;
+      this.items = data;
     }, err => {
       this.error = true;
     });
