@@ -27,7 +27,7 @@ const routes: Routes = [
   { path: 'movimiento', component: MovimientoComponent },
   { path: 'movimiento/registrar', component: CrearMovimientoComponent },
   { path: 'movimiento/modificar/:id', component: ModificarMovimientoComponent },
-  { path: '', redirectTo:'/home', pathMatch: 'full' }
+  { path: '', redirectTo:'/home', pathMatch: 'full' },
   {
     path: '**',
     redirectTo: '',

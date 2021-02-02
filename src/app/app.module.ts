@@ -37,7 +37,7 @@ import { ModificarMovimientoComponent } from './components/movimiento/modificar-
     MovimientoComponent,
     CrearMovimientoComponent,
     ErrorComponent,
-    ModificarMovimientoComponent
+    ModificarMovimientoComponent,
     SeguroComponent
   ],
   imports: [

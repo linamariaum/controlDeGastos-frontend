@@ -13,7 +13,7 @@ export const keycloakLoginRegisterOptionsConfig: KeycloakLoginOptions = {
 export const environment = {
   production: true,
   serverUrl: 'http://localhost:4200',
-  apiUrl: 'http://localhost:8090',
+  APIUrl: 'http://localhost:8090',
   defaultLanguage: 'es-CO',
   supportedLanguages: ['en-US', 'es-CO'],
   rtl: false,
