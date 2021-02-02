@@ -224,4 +224,12 @@ export class ProductoComponent implements OnInit {
       this.error = true;
     });
   }
+
+  limpiarCampos() {
+    this.listarCategorias();
+    this.nuevoProdSer = {
+      nombre: '',
+      descripcion: ''
+    };
+  }
 }

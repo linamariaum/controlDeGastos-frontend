@@ -69,6 +69,10 @@
     color: #fff;
 }
 
+.btn-outline-primary:disabled {
+    pointer-events: none;
+}
+
 .btn-primary {
     margin-top: 2rem;
     background-color: #00a18f;

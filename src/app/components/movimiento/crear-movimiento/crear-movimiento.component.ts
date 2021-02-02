@@ -42,7 +42,7 @@ export class CrearMovimientoComponent implements OnInit {
 
   ngOnInit(): void {
 
-    //this.listarPuntos();
+    this.listarPuntos();
     
     /** JSON */
 
@@ -157,23 +157,17 @@ export class CrearMovimientoComponent implements OnInit {
 
   }
 
-  buscarProducto(referencia: string, estado: string) {
-    let referenciaAux: string;
-    this.limpiarCampos();
-  }
-
   agregarProducto() {
-    /*this.productoService.consultarProductoServicio(this.productoAgregar.idProductoServicio).subscribe(data => {
+    this.productoService.consultarProductoServicio(this.productoAgregar.idProductoServicio).subscribe(data => {
       this.error = false;
       this.productoAgregar.nombre = data[0].nombre;
     }, err => {
       this.error = true;
-    });*/
+    });
     this.productoAgregar.neto = this.productoAgregar.cantidad * this.productoAgregar.precioUnitario;
     this.productosAgregados.push(this.productoAgregar);
     console.log(this.productosAgregados);
     this.movimiento.total += this.productoAgregar.neto;
-    //this.eliminarProducto(this.productoBuscado);
   }
 
   eliminarProducto(produc: any) {
@@ -183,22 +177,29 @@ export class CrearMovimientoComponent implements OnInit {
   }
 
   crearMovimiento() {
-    //this.compra.fecha = this.obtenerFecha();
     this.guardando = true;
-    this.movimiento.items = this.productosAgregados;
+    
     if(this.movimiento.tipoMovimiento == 'informativo'){
       this.movimiento.tipoMovimiento = 0;
     }else{
       this.movimiento.tipoMovimiento = 1;
     }
-    console.log(this.movimiento);
-    this.movimientoService.crearMovimiento(this.movimiento).subscribe(data => {
-      this.error = false;
-      this.router.navigate(['/movimiento']);
-    }, err => {
-      this.guardando = false;
-      this.error = true;
+    console.log(this.productosAgregados);
+    this.productosAgregados.forEach(producto => {
+      this.movimiento.idProductoServicio = producto.idProductoServicio;
+      this.movimiento.cantidad = producto.cantidad;
+      this.movimiento.valorUnitario = producto.precioUnitario;
+      this.movimiento.total = producto.neto;
+      console.log(this.movimiento);
+      this.movimientoService.crearMovimiento(this.movimiento).subscribe(data => {
+        this.error = false;
+        this.router.navigate(['/movimiento']);
+      }, err => {
+        this.guardando = false;
+        this.error = true;
+      });
     });
+    
   }
 
   obtenerFecha() {

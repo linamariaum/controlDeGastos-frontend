@@ -101,5 +101,13 @@ export class PuntoCompraComponent implements OnInit {
     });
   }
 
+  limpiarCampos() {
+    this.nuevoPunto = {
+      nombre: '',
+      descripcion: '',
+      estratoEconomico: ''
+    };
+  }
+
   deleteFile(){}
 }

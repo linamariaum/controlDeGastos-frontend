@@ -139,12 +139,12 @@ export class ItemComponent implements OnInit {
   }
 
   listarCategorias(){
-    /*this.categoriaService.consultarCategorias(this.usuarioId).subscribe(data => {
+    this.categoriaService.consultarCategorias(this.usuarioId).subscribe(data => {
       this.error = false;
       this.categorias = data;
     }, err => {
       this.error = true;
-    });*/
+    });
   }
 
   crearItem(){
@@ -176,4 +176,13 @@ export class ItemComponent implements OnInit {
       this.error = true;
     });
   }
+
+  limpiarCampos() {
+    this.listarCategorias();
+    this.nuevoItem = {
+      nombre: '',
+      descripcion: ''
+    };
+  }
+
 }

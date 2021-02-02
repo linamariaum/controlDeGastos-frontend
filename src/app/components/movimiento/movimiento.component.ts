@@ -29,7 +29,8 @@ export class MovimientoComponent implements OnInit {
       tipoMovimiento: '0',
       cantidad: 1,
       valorUnitario: 2000,
-      total: 2000
+      total: 40000,
+      fecha: '13/01/21'
     },
     {
       id: '2',
@@ -38,18 +39,20 @@ export class MovimientoComponent implements OnInit {
       idPuntoDeCompra: '1',
       tipoMovimiento: '0',
       cantidad: 1,
-      valorUnitario: 2000,
-      total: 2000
+      valorUnitario: 25000,
+      total: 2000,
+      fecha: '19/01/21'
     },
     {
       id: '3',
       idUsuario: '1',
       idProductoServicio: '1',
       idPuntoDeCompra: '1',
-      tipoMovimiento: '0',
+      tipoMovimiento: '1',
       cantidad: 1,
-      valorUnitario: 2000,
-      total: 2000
+      valorUnitario: 78000,
+      total: 2000,
+      fecha: '22/01/21'
     }
   ];
 
